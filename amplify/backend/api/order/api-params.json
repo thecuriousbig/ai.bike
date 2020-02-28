@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/order",
+            "lambdaFunction": "order",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "order",
+    "apiName": "order",
+    "functionArns": [
+        {
+            "lambdaFunction": "order"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-bikeai-develop-201904-authRole",
+        "unAuthRoleName": "amplify-bikeai-develop-201904-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "order",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

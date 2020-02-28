@@ -1,0 +1,20 @@
+{
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-bikeai-develop-201904-authRole",
+            "UnauthRoleArn": "arn:aws:iam::377416533826:role/amplify-bikeai-develop-201904-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::377416533826:role/amplify-bikeai-develop-201904-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "amplify-bikeai-develop-201904-deployment",
+            "UnauthRoleName": "amplify-bikeai-develop-201904-unauthRole",
+            "StackName": "amplify-bikeai-develop-201904",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:377416533826:stack/amplify-bikeai-develop-201904/3cfe7880-5251-11ea-9ff5-0a2bfeee7532",
+            "AmplifyAppId": "dscslg15mm2xp"
+        },
+        "categories": {
+            "auth": {
+                "bikeai0b2324fe": {}
+            }
+        }
+    }
+}
