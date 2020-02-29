@@ -14,6 +14,9 @@
         "categories": {
             "auth": {
                 "bikeai0b2324fe": {}
+            },
+            "function": {
+                "orderTrigger742035dc": {}
             }
         }
     }
