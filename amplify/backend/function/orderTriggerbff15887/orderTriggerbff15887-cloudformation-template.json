@@ -40,12 +40,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"orderTrigger742035dc",
+						"orderTriggerbff15887",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"orderTrigger742035dc",
+									"orderTriggerbff15887",
 									"-",
 									{
 										"Ref": "env"
@@ -72,7 +72,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-bikeai-develop-201904-deployment",
-					"S3Key": "amplify-builds/orderTrigger742035dc-377754532b6a6b4d3835-build.zip"
+					"S3Key": "amplify-builds/orderTriggerbff15887-4b4e33366b7171476342-build.zip"
 				}
 			}
 		},
@@ -82,12 +82,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"orderLambdaRole742035dc",
+						"orderLambdaRolebff15887",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"orderLambdaRole742035dc",
+									"orderLambdaRolebff15887",
 									"-",
 									{
 										"Ref": "env"
