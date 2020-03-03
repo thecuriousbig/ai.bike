@@ -161,7 +161,7 @@
 							],
 							"Resource": {
 								"Fn::Sub": [
-									"arn:aws:sqs:${region}:${account}:${queue}"
+									"arn:aws:sqs:${region}:${account}:${queue}",
 									{
 										"region": {
 											"Ref": "AWS::Region"
