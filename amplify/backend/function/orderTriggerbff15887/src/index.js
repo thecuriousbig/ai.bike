@@ -1,9 +1,10 @@
-let environment = process.env.ENV;
 let region = process.env.REGION;
 
 let AWS = require("aws-sdk");
-let sns = new AWS.SNS();
+let sqs = AWS.SQS({region});
+let QUEUE_URL = `arn:aws:sqs:${region}:377416533826:order.fifo`
 // eslint-disable-next-line
+
 
 exports.handler = function(event, context) {
   //TODO: publish the data to the topic that iot device subscribes.
@@ -19,10 +20,16 @@ exports.handler = function(event, context) {
   console.log("username: ", username);
 
   let params = {
-    Subject: `order by: ${username}`,
-    Message: message,
-    TopicArn: `arn:aws:sns:${region}:377416533826:order`
+    MessageBody: message,
+    QueueUrl: QUEUE_URL
   }
-  console.log('sns params: ', params);
-  // sns.publish(params, context.done)
+  sqs.sendMessage(params, (err, data) => {
+    if (err) {
+      console.log('send message error: ', err)
+      context.done('error', 'send message failed')
+    } else {
+      console.log('send message success: ', data)
+      context.done(null, '')
+    }
+  })
 };

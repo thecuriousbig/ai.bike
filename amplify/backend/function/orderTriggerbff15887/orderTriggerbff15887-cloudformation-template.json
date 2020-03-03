@@ -153,6 +153,28 @@
 									}
 								]
 							}
+						},
+						{
+							"Effect": "Allow",
+							"Action": [
+								"sqs:SendMessage"
+							],
+							"Resource": {
+								"Fn::Sub": [
+									"arn:aws:sqs:${region}:${account}:${queue}"
+									{
+										"region": {
+											"Ref": "AWS::Region"
+										},
+										"account": {
+											"Ref": "AWS::AccountId"
+										},
+										"queue": {
+											"Ref": "order.fifo"
+										}
+									}
+								]
+							}
 						}
 					]
 				}
