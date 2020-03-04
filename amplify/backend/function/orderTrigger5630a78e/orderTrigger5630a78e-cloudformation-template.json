@@ -40,12 +40,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"orderTriggerbff15887",
+						"orderTrigger5630a78e",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"orderTriggerbff15887",
+									"orderTrigger5630a78e",
 									"-",
 									{
 										"Ref": "env"
@@ -59,6 +59,9 @@
 					"Variables": {
 						"ENV": {
 							"Ref": "env"
+						},
+						"REGION": {
+							"Ref": "AWS::Region"
 						}
 					}
 				},
@@ -72,7 +75,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-bikeai-develop-201904-deployment",
-					"S3Key": "amplify-builds/orderTriggerbff15887-4b4e33366b7171476342-build.zip"
+					"S3Key": "amplify-builds/orderTrigger5630a78e-692f37674e3366305a53-build.zip"
 				}
 			}
 		},
@@ -82,12 +85,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"orderLambdaRolebff15887",
+						"orderLambdaRole5630a78e",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"orderLambdaRolebff15887",
+									"orderLambdaRole5630a78e",
 									"-",
 									{
 										"Ref": "env"
@@ -157,20 +160,17 @@
 						{
 							"Effect": "Allow",
 							"Action": [
-								"sqs:SendMessage"
+								"sqs:*"
 							],
 							"Resource": {
 								"Fn::Sub": [
-									"arn:aws:sqs:${region}:${account}:${queue}",
+									"arn:aws:sqs:${region}:${account}:order.fifo",
 									{
 										"region": {
 											"Ref": "AWS::Region"
 										},
 										"account": {
 											"Ref": "AWS::AccountId"
-										},
-										"queue": {
-											"Ref": "order.fifo"
 										}
 									}
 								]

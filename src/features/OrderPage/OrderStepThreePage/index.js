@@ -9,7 +9,7 @@ import Container from "../component/Container";
 import ContentContainer from "../component/ContentContainer";
 import StaticMap from "./component/StaticMap";
 import Summary from "./component/Summary";
-import { useRouteStateContext, useRouteDispatchContext } from "context/routing";
+import { useRouteStateContext } from "context/routing";
 import { useUserContext } from "context/user";
 import { fontFamily, fontSize, color, device } from "style/theme";
 
@@ -58,7 +58,6 @@ const ConfirmationButton = styled.button`
 
 const OrderStepThreePage = props => {
     const routeState = useRouteStateContext();
-    const routeDispatch = useRouteDispatchContext();
     const { user } = useUserContext();
     const history = useHistory();
 
@@ -88,7 +87,6 @@ const OrderStepThreePage = props => {
             };
             const result = await API.post("order", "/order", { body: order });
             console.log(result);
-            //TODO: wait till Lambda function trigger the dynamodb table finish before go to next page.
             history.replace('/order');
         } catch (error) {
             console.log('confirm order error: ', error);

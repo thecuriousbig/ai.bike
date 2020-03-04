@@ -64,7 +64,7 @@
                 }
             ]
         },
-        "orderTriggerbff15887": {
+        "orderTrigger5630a78e": {
             "service": "Lambda",
             "providerPlugin": "awscloudformation",
             "build": true,
