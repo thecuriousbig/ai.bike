@@ -22,7 +22,10 @@ exports.handler = function(event, context) {
       order = record.dynamodb.NewImage;
     })
     console.log("order: ", order);
-  
+    
+    // TODO: Fix the orderData or the message format.
+    // Right now its a Dynamodb json format. Which have to convert it 
+    // into Vanilla JSON format and then JSON.stringify and send to the SQS.
     let orderData = {
       'username': username,
       'origin': order.origin,
