@@ -63,17 +63,17 @@ const OrderStepThreePage = (props) => {
 		try {
 			/* for COVID situations */
 			let place_id;
-			switch (destination.name) {
-				case 'อาคารวิศววัฒนะ (ตึกแดง)':
+			switch (destination.place_id) {
+				case 'ChIJsT71PFKi4jARhU6xJydOuSY':
 					place_id = 1;
 					break;
-				case 'อาคารเรียนและปฏิบัติการทางศิลปศาสตร์':
+				case 'ChIJNf9Nn1Gi4jARL8YYquhn7iA':
 					place_id = 2;
 					break;
-				case 'ภาควิชาฟิสิกส์ คณะวิทยาศาสตร์':
+				case 'ChIJAd-3x1Gi4jARJjxhOvgiA8M':
 					place_id = 3;
 					break;
-				case 'KMUTT Library':
+				case 'ChIJ0_p-ulGi4jARwChSDlo_cJ4':
 					place_id = 4;
 					break;
 				default:
