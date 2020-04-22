@@ -60,29 +60,8 @@ const OrderStepThreePage = (props) => {
 	const { bike, origin, destination, direction, duration, distance, travelMode } = routeState;
 
 	const handleConfirmOrder = async (e) => {
-		/* for normal situations */
-		// try {
-		//     const order = {
-		//         id: uuidv4(),
-		//         user: user,
-		//         status: "DELIVERING",
-		//         vehicle: bike,
-		//         origin: JSON.stringify(origin),
-		//         destination: JSON.stringify(destination),
-		//         direction: JSON.stringify(direction),
-		//         duration: JSON.stringify(duration),
-		//         distance: JSON.stringify(distance),
-		//         travelMode: travelMode
-		//     };
-		//     const result = await API.post("order", "/order", { body: order });
-		//     console.log(result);
-		//     history.replace('/order');
-		// } catch (error) {
-		//     console.log('confirm order error: ', error);
-		// }
-
-		/* for COVID situation */
 		try {
+			/* for COVID situations */
 			let place_id;
 			switch (destination.name) {
 				case 'อาคารวิศววัฒนะ (ตึกแดง)':
@@ -100,8 +79,24 @@ const OrderStepThreePage = (props) => {
 				default:
 					place_id = 0;
 			}
-			console.log('place_id : ', place_id);
-			const result = await API.post('order', '/order', { body: { destination: place_id } });
+			const order = {
+				id: uuidv4(),
+				user: user,
+				destination: place_id,
+			};
+			// const order = {
+			//     id: uuidv4(),
+			//     user: user,
+			//     status: "DELIVERING",
+			//     vehicle: bike,
+			//     origin: JSON.stringify(origin),
+			//     destination: JSON.stringify(destination),
+			//     direction: JSON.stringify(direction),
+			//     duration: JSON.stringify(duration),
+			//     distance: JSON.stringify(distance),
+			//     travelMode: travelMode
+			// };
+			const result = await API.post('order', '/order', { body: order });
 			console.log(result);
 			history.replace('/order');
 		} catch (error) {
