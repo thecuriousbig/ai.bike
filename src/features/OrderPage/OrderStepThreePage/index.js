@@ -83,26 +83,25 @@ const OrderStepThreePage = (props) => {
 
 		/* for COVID situation */
 		try {
-			const order = {
-				destination: 0,
-			};
+			let place_id;
 			switch (destination.name) {
 				case 'อาคารวิศววัฒนะ (ตึกแดง)':
-					order.destination = 1;
+					place_id = 1;
 					break;
 				case 'อาคารเรียนและปฏิบัติการทางศิลปศาสตร์':
-					order.destination = 2;
+					place_id = 2;
 					break;
 				case 'ภาควิชาฟิสิกส์ คณะวิทยาศาสตร์':
-					order.destination = 3;
+					place_id = 3;
 					break;
 				case 'KMUTT Library':
-					order.destination = 4;
+					place_id = 4;
 					break;
 				default:
-					order.destination = 0;
+					place_id = 0;
 			}
-			const result = await API.post('order', '/order', { body: order });
+			console.log('place_id : ', place_id);
+			const result = await API.post('order', '/order', { body: { destination: place_id } });
 			console.log(result);
 			history.replace('/order');
 		} catch (error) {
