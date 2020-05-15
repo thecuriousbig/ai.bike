@@ -203,13 +203,6 @@ function HeadBar(props) {
                         >
                             <span>สั่งจอง</span>
                         </MenuToggleNavigation.Item>
-
-                        <MenuToggleNavigation.Item
-                            onClick={handleNavigationClick}
-                        >
-                            <span>ติดตามรายการ</span>
-                        </MenuToggleNavigation.Item>
-
                         <MenuToggleNavigation.Item onClick={logout}>
                             <span>ออกจากระบบ</span>
                         </MenuToggleNavigation.Item>
