@@ -132,7 +132,7 @@ function HeadBar(props) {
      */
     const handleNavigationClick = e => {
         if (e.target.innerText === "หน้าแรก") {
-            return clearStateAndGoToPath('/')
+            return clearStateAndGoToPath('/order')
         } else if (e.target.innerText === "สั่งจอง") {
             /* check if current location is the same. */
             /* if same do nothing, otherwise go to /order/step-one and clear all current state. */
