@@ -137,10 +137,6 @@ function HeadBar(props) {
             /* check if current location is the same. */
             /* if same do nothing, otherwise go to /order/step-one and clear all current state. */
             return location.pathname === '/order/step-one' ? null: clearStateAndGoToPath('/order/step-one');
-        } else if (e.target.innerText === "ติดตามรายการ") {
-            /* check if current location is the same. */
-            /* if same do nothing, otherwise go to /deliver and clear all current state. */
-            return location.pathname === '/deliver' ? null: clearStateAndGoToPath('/deliver')
         }
     };
 
@@ -182,11 +178,6 @@ function HeadBar(props) {
                     <Navigation.Link onClick={handleNavigationClick}>
                         <Navigation.ListItem>
                             สั่งจอง
-                        </Navigation.ListItem>
-                    </Navigation.Link>
-                    <Navigation.Link onClick={handleNavigationClick}>
-                        <Navigation.ListItem>
-                            ติดตามรายการ
                         </Navigation.ListItem>
                     </Navigation.Link>
                     <Navigation.Link onClick={logout}>
