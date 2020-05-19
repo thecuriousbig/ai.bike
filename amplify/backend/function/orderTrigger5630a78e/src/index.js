@@ -10,7 +10,7 @@ let AWS = require("aws-sdk");
 AWS.config.update({ region })
 let sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 let accountId = '377416533826'
-let QUEUE_URL = `https://sqs.${region}.amazonaws.com/${accountId}/order.fifo`
+let QUEUE_URL = `https://sqs.${region}.amazonaws.com/${accountId}/order`
 // eslint-disable-next-line
 
 exports.handler = function(event, context) {
@@ -23,16 +23,11 @@ exports.handler = function(event, context) {
     })
     console.log("order: ", order);
     
-    // TODO: Fix the orderData or the message format.
-    // Right now its a Dynamodb json format. Which have to convert it 
-    // into Vanilla JSON format and then JSON.stringify and send to the SQS.
     let orderData = {
       'username': username,
-      'origin': order.origin,
       'destination': order.destination,
-      'direction': order.direction,
-      'distance': order.distance,
-      'duration': order.duration
+      'vehicle':  order.vehicle,
+      'status': order.status
     }
     let sqsOrderData = {
       MessageAttributes: {
@@ -40,30 +35,20 @@ exports.handler = function(event, context) {
           DataType: "String",
           StringValue: orderData.username
         },
-        "origin": {
-          DataType: "String",
-          StringValue: "origin"
-        },
         "destination": {
           DataType: "String",
           StringValue: "destination"
         },
-        "direction": {
+        "vehicle": {
           DataType: "String",
-          StringValue: "direction"
+          StringValue: "vehicle"
         },
-        "distance": {
+        "status": {
           DataType: "String",
-          StringValue: "distance"
-        },
-        "duration": {
-          DataType: "String",
-          StringValue: "duration"
+          StringValue: "status"
         }
       },
       MessageBody: JSON.stringify(orderData),
-      MessageDeduplicationId: username,
-      MessageGroupId: "UserOrders",
       QueueUrl: QUEUE_URL
     }
 
