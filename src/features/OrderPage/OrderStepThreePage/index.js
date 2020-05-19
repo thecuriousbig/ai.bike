@@ -79,23 +79,20 @@ const OrderStepThreePage = (props) => {
 				default:
 					place_id = 0;
 			}
+			
 			const order = {
-				id: uuidv4(),
-				user: user,
-				destination: place_id,
+			    id: uuidv4(),
+			    user: user,
+			    status: "DELIVERING",
+				vehicle: bike,
+				destination: place_id
+			    // origin: JSON.stringify(origin),
+			    // destination: JSON.stringify(destination),
+			    // direction: JSON.stringify(direction),
+			    // duration: JSON.stringify(duration),
+			    // distance: JSON.stringify(distance),
+			    // travelMode: travelMode
 			};
-			// const order = {
-			//     id: uuidv4(),
-			//     user: user,
-			//     status: "DELIVERING",
-			//     vehicle: bike,
-			//     origin: JSON.stringify(origin),
-			//     destination: JSON.stringify(destination),
-			//     direction: JSON.stringify(direction),
-			//     duration: JSON.stringify(duration),
-			//     distance: JSON.stringify(distance),
-			//     travelMode: travelMode
-			// };
 			const result = await API.post('order', '/order', { body: order });
 			console.log(result);
 			history.replace('/order');
