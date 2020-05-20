@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { device, color, fontFamily, fontSize } from "style/theme";
+import { color, fontFamily, fontSize } from "style/theme";
 const Container = styled.div`
     width: 100%;
     display: flex;

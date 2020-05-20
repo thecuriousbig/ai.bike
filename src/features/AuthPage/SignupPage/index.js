@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import uuidv4 from "uuid/v4"
 import styled from "styled-components";
 import { Auth, API } from "aws-amplify";
 import { useHistory } from "react-router-dom";

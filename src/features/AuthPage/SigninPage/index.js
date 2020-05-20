@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { Auth, API } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { useAuthContext } from "context/authentication";
 import { useUserContext } from "context/user";
 import Button from "../component/Button";
