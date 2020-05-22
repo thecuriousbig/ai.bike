@@ -10,20 +10,20 @@ let sqs = new aws.SQS({
 
 exports.handler = async (event, context, callback) => {
   try {
-    let eventData = Object.crerate({})
+    let payload = Object.create({})
     event.Records.forEach((record) => {
       payload = record.dynamodb.NewImage
     })
 
     let order = {
-      id: eventData.id.S,
-      user: eventData.user.S,
-      destination: eventData.destination.N,
-      vehicle: eventData.vehicle.S,
-      status: eventData.status.S,
+      id: payload.id.S,
+      user: payload.user.S,
+      destination: payload.destination.N,
+      vehicle: payload.vehicle.S,
+      status: payload.status.S,
     }
 
-    let payload = {
+    let params = {
       MessageAttributes: {
         id: {
           DataType: 'String',
@@ -32,7 +32,7 @@ exports.handler = async (event, context, callback) => {
           DataType: 'String',
         },
         destination: {
-          DataType: 'String',
+          DataType: 'Number',
         },
         vehicle: {
           DataType: 'String',
@@ -45,7 +45,7 @@ exports.handler = async (event, context, callback) => {
       QueueUrl: queueURL,
     }
 
-    const sendMessageStatus = await sqs.sendMessage(payload).promise()
+    const sendMessageStatus = await sqs.sendMessage(params).promise()
     const message = `send message status: ${sendMessageStatus}`
     callback(null, message)
   } catch (error) {
