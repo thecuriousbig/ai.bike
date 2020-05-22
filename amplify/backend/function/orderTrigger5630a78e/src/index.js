@@ -50,6 +50,6 @@ exports.handler = async (event, context, callback) => {
     callback(null, message)
   } catch (error) {
     const message = `send message error: ${error}`
-    context.done(message)
+    callback(message)
   }
 }
