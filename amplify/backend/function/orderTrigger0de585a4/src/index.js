@@ -17,8 +17,6 @@ exports.handler = async (event, context, callback) => {
     event.Records.forEach((record) => {
       payload = record.dynamodb.Keys
     })
-    console.log('username => ', username)
-    console.log('orderid => ', orderid)
 
     let params = {
       TableName: tableName,
