@@ -1,66 +1,55 @@
-/* Amplify Params - DO NOT EDIT
-You can access the following resource attributes as environment variables from your Lambda function
-var environment = process.env.ENV
-var region = process.env.REGION
+let region = process.env.REGION
+let queueURL = process.env.QUEUE_URL
 
-Amplify Params - DO NOT EDIT */
-let region = process.env.REGION;
+let aws = require('aws-sdk')
 
-let AWS = require("aws-sdk");
-AWS.config.update({ region })
-let sqs = new AWS.SQS({apiVersion: '2012-11-05'});
-let accountId = '377416533826'
-let QUEUE_URL = `https://sqs.${region}.amazonaws.com/${accountId}/order`
-// eslint-disable-next-line
+let sqs = new aws.SQS({
+  apiVersion: '2012-11-05',
+  region: region,
+})
 
-exports.handler = function(event, context) {
+exports.handler = async (event, context, callback) => {
   try {
-    let username;
-    let order;
-    event.Records.forEach(record => {
-      username = record.dynamodb.Keys.user.S;
-      order = record.dynamodb.NewImage;
+    let eventData = Object.crerate({})
+    event.Records.forEach((record) => {
+      payload = record.dynamodb.NewImage
     })
-    console.log("order: ", order);
-    
-    let orderData = {
-      'username': username,
-      'destination': order.destination,
-      'vehicle':  order.vehicle,
-      'status': order.status
+
+    let order = {
+      id: eventData.id.S,
+      user: eventData.user.S,
+      destination: eventData.destination.N,
+      vehicle: eventData.vehicle.S,
+      status: eventData.status.S,
     }
-    let sqsOrderData = {
+
+    let payload = {
       MessageAttributes: {
-        "username": {
-          DataType: "String",
-          StringValue: orderData.username
+        id: {
+          DataType: 'String',
         },
-        "destination": {
-          DataType: "String",
-          StringValue: "destination"
+        user: {
+          DataType: 'String',
         },
-        "vehicle": {
-          DataType: "String",
-          StringValue: "vehicle"
+        destination: {
+          DataType: 'String',
         },
-        "status": {
-          DataType: "String",
-          StringValue: "status"
-        }
+        vehicle: {
+          DataType: 'String',
+        },
+        status: {
+          DataType: 'String',
+        },
       },
-      MessageBody: JSON.stringify(orderData),
-      QueueUrl: QUEUE_URL
+      MessageBody: order,
+      QueueUrl: queueURL,
     }
 
-    let sendSqsMessage = sqs.sendMessage(sqsOrderData).promise();
-
-    sendSqsMessage.then((data) => {
-        console.log(`Order | SUCCESS: ${data.MessageId}`);
-    }).catch((err) => {
-        console.log(`OrdersSvc | ERROR: ${err}`);
-    });
+    const sendMessageStatus = await sqs.sendMessage(payload).promise()
+    const message = `send message status: ${sendMessageStatus}`
+    callback(null, message)
   } catch (error) {
-    console.log('error try catch: ', error)
-    context.done(null, '')
+    const message = `send message error: ${error}`
+    context.done(message)
   }
-};
+}
