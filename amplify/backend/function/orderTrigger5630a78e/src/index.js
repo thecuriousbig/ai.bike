@@ -27,7 +27,7 @@ exports.handler = async (event, context, callback) => {
       user: payload.user.S,
       destination: payload.destination.N,
       vehicle: payload.vehicle.S,
-      status: payload.status.S,
+      flag: payload.flag.S,
     }
 
     let params = {
@@ -48,9 +48,9 @@ exports.handler = async (event, context, callback) => {
           DataType: 'String',
           StringValue: order.vehicle
         },
-        status: {
+        flag: {
           DataType: 'String',
-          StringValue: order.status
+          StringValue: order.flag
         },
       },
       MessageBody: JSON.stringify(order),

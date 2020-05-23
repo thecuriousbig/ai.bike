@@ -83,7 +83,7 @@ const OrderStepThreePage = (props) => {
 			const order = {
 			    id: uuidv4(),
 			    user: user,
-			    status: "DELIVERING",
+			    flag: "DELIVERING",
 				vehicle: bike,
 				destination: place_id
 			    // origin: JSON.stringify(origin),

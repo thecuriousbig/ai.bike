@@ -75,7 +75,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-bikeai-develop-201904-deployment",
-					"S3Key": "amplify-builds/orderTrigger5630a78e-636c79486f4472736275-build.zip"
+					"S3Key": "amplify-builds/orderTrigger5630a78e-466972464d7a31784832-build.zip"
 				}
 			}
 		},
