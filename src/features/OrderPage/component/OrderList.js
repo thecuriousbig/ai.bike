@@ -52,23 +52,34 @@ const OrderList = props => {
     const { orders } = props
     const convertDestination = ["อาคารวิศววัฒนะ","อาคารเรียนและปฎิบัติการทางศิลปศาสตร์", "ภาควิชาฟิสิกส์ คณะวิทยาศาสตร์", "KMUTT Library"]
 
-    const renderOrders = () => (
-        <UserOrder>
-            {orders.map((item, index) => {
-                return (
-                    <UserOrder.Card key={index}>
-                        <UserOrder.Header>ID: {"   "}{item.id.slice(0, 8)}</UserOrder.Header>
-                        <UserOrder.Content>
-                            <UserOrder.Text status=""><strong>จุดหมาย{"   "}</strong> {convertDestination[item.destination - 1]}</UserOrder.Text>
-                            <UserOrder.Text status=""><strong>ประเภทจักรยาน{"   "}</strong> {item.vehicle}</UserOrder.Text>
-                            <UserOrder.Text status={item.status}><strong>สถานะ{"   "}</strong> {item.status}</UserOrder.Text>
-                        </UserOrder.Content>
-                    </UserOrder.Card>
-                )
-            }
-            )}
-        </UserOrder>
-    )
+    const renderOrders = () => {
+        console.log(orders)
+        if (orders === undefined || (Array.isArray(orders) && orders.length === 0))
+            return <h1>NO AVAILABLE ORDERS</h1>
+            
+        const filteredOrders = orders.filter((value, index, array) => value !== undefined)
+        if (filteredOrders.length === 0)
+            return <h1>THERE IS ERROR OCCURRED IN ORDERS DISPLAY</h1>
+        else 
+            return (
+                <UserOrder>
+                    {filteredOrders.map((value, index) => {
+                        return (
+                            <UserOrder.Card key={index}>
+                                <UserOrder.Header>ID: {"   "}{value.id.slice(0, 8)}</UserOrder.Header>
+                                <UserOrder.Content>
+                                    <UserOrder.Text status=""><strong>จุดหมาย{"   "}</strong> {convertDestination[value.destination - 1]}</UserOrder.Text>
+                                    <UserOrder.Text status=""><strong>ประเภทจักรยาน{"   "}</strong> {value.vehicle}</UserOrder.Text>
+                                    <UserOrder.Text status={value.status}><strong>สถานะ{"   "}</strong> {value.status}</UserOrder.Text>
+                                </UserOrder.Content>
+                            </UserOrder.Card>
+                        )
+                    }
+                    )}
+                </UserOrder>
+            )
+    }
+
     return renderOrders()
 }
 

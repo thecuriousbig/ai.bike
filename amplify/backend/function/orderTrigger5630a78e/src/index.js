@@ -10,8 +10,15 @@ let sqs = new aws.SQS({
 
 exports.handler = async (event, context, callback) => {
   try {
+    
+    const records = event.Records
+    if (records[0].eventName !== 'INSERT') {
+      console.log(`This function has nothing to do with ${records[0].eventName} events`)
+      return null
+    }
+    
     let payload = Object.create({})
-    event.Records.forEach((record) => {
+    records.forEach((record) => {
       payload = record.dynamodb.NewImage
     })
 
@@ -27,29 +34,34 @@ exports.handler = async (event, context, callback) => {
       MessageAttributes: {
         id: {
           DataType: 'String',
+          StringValue: order.id
         },
         user: {
           DataType: 'String',
+          StringValue: order.user
         },
         destination: {
           DataType: 'Number',
+          StringValue: order.destination
         },
         vehicle: {
           DataType: 'String',
+          StringValue: order.vehicle
         },
         status: {
           DataType: 'String',
+          StringValue: order.status
         },
       },
-      MessageBody: order,
+      MessageBody: JSON.stringify(order),
       QueueUrl: queueURL,
     }
 
     const sendMessageStatus = await sqs.sendMessage(params).promise()
-    const message = `send message status: ${sendMessageStatus}`
-    callback(null, message)
+    console.log(`send message status: ${sendMessageStatus}`)
+    return null
   } catch (error) {
-    const message = `send message error: ${error}`
-    callback(message)
+    console.error(`send message error: ${error}`)
+    throw new Error(error)
   }
 }

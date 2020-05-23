@@ -14,16 +14,24 @@ if (environment && environment !== 'NONE') {
 exports.handler = async (event, context, callback) => {
   try {
     let payload = Object.create({})
-    event.Records.forEach((record) => {
+    const records = event.Records
+    
+    if (records[0].eventName !== 'INSERT') {
+      console.log(`This function has nothing to do with ${records[0].eventName} event`)
+      return null
+    }
+    
+    records.forEach((record) => {
       payload = record.dynamodb.Keys
     })
-
+    
+    let expression = 'SET orders = list_append(orders, :i)'
     let params = {
       TableName: tableName,
       Key: {
         name: payload.user.S,
       },
-      UpdateExpression: 'SET orders = list_append(orders, :i)',
+      UpdateExpression: expression,
       ExpressionAttributeValues: {
         ':i': [payload.id.S],
       },
@@ -32,10 +40,10 @@ exports.handler = async (event, context, callback) => {
 
     // GET the user data from dynamodb user-develop table
     const updateStatus = await dynamodb.update(params).promise()
-    const message = `update user table status: ${updateStatus}`
-    callback(null, message)
+    console.log(`update user table status: ${updateStatus}`)
+    return null
   } catch (error) {
-    const message = `update user table error: ${error}`
-    callback(message)
+    console.error(`update user table error: ${error}`)
+    throw new Error(error)
   }
 }
