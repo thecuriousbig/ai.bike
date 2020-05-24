@@ -70,7 +70,7 @@ const OrderList = props => {
                                 <UserOrder.Content>
                                     <UserOrder.Text status=""><strong>จุดหมาย{"   "}</strong> {convertDestination[value.destination - 1]}</UserOrder.Text>
                                     <UserOrder.Text status=""><strong>ประเภทจักรยาน{"   "}</strong> {value.vehicle}</UserOrder.Text>
-                                    <UserOrder.Text status={value.status}><strong>สถานะ{"   "}</strong> {value.status}</UserOrder.Text>
+                                    <UserOrder.Text status={value.flag}><strong>สถานะ{"   "}</strong> {value.flag}</UserOrder.Text>
                                 </UserOrder.Content>
                             </UserOrder.Card>
                         )
